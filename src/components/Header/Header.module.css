@@ -1,0 +1,26 @@
+.header {
+  --headerColor: #fffed9;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 60px;
+  background-color: var(--headerColor);
+
+  box-shadow: 0 0 0 100vmax var(--headerColor);
+  clip-path: inset(0 -100vmax);
+}
+
+.headerContainer {
+  min-width: 60%;
+  width: max-content;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px;
+}

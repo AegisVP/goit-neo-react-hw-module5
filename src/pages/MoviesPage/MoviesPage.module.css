@@ -1,0 +1,12 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.label {
+  font-size: 20px;
+}

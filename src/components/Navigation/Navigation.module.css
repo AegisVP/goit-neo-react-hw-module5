@@ -1,0 +1,19 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+}
+
+.navlink {
+  color: #000000;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.navlink:hover,
+.navlink:focus {
+  color: brown;
+}

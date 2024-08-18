@@ -1,0 +1,36 @@
+.searchBoxLabel {
+  position: relative;
+  color: black;
+}
+
+.searchBox {
+  width: 600px;
+  padding: 2px 32px 5px 5px;
+
+  outline: none;
+  border: 1px solid #6f6f6f;
+  border-radius: 5px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.searchButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 30px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+
+  border-radius: 0 5px 5px 0;
+  border: none;
+  outline: none;
+}
