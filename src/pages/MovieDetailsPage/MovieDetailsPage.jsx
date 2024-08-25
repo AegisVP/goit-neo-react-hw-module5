@@ -11,10 +11,10 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({});
 
   const params = useParams();
-  const location = useLocation();
   const movieId = params.movieId;
-
-  const returnLink = location.state?.from ? `${location.state.from}${location.state?.query ? '?query=' + location.state?.query + '&page=' + location.state?.page : ''}` : '/movies';
+  const location = useLocation();
+  const { from, query, page } = location.state || {};
+  const returnLink = from ? `${from}${query ? '?' + new URLSearchParams({ page, query }).toString() : ''}` : '/movies';
 
   useEffect(() => {
     if (!movieId) return;
@@ -37,10 +37,10 @@ export default function MovieDetailsPage() {
         <>
           <MovieDetails movie={movie} />
           <div className={css.links}>
-            <NavLink className={css.link} to="cast" state={{...location.state, movieId}} replace={true}>
+            <NavLink className={css.link} to="cast" state={{ ...location.state, movieId }} replace={true}>
               Cast
             </NavLink>
-            <NavLink className={css.link} to="reviews" state={{...location.state, movieId}} replace={true}>
+            <NavLink className={css.link} to="reviews" state={{ ...location.state, movieId }} replace={true}>
               Reviews
             </NavLink>
           </div>

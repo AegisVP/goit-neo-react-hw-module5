@@ -1,5 +1,5 @@
 import css from './MoviesPage.module.css';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { searchMovies } from '../../api/getMovieData';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -10,24 +10,24 @@ import Pagination from '../../components/Pagination/Pagination';
 export default function MoviesPage() {
   const [qParams, setQParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(qParams.get('page') || 1);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
-  const navigate = useNavigate();
-  const query = qParams.get('query') || '';
 
-  function onMovieSearch(query) {
-    if ('' === query) return;
+  let query = qParams.get('query') || '';
+  let page = parseInt(qParams.get('page') || 1);
 
-    setQParams({ query, page });
-    navigate(`/movies?page=1&query=${query}`);
+  function onMovieSearch(passedQuery) {
+    if ('' === passedQuery) return;
+
+    query = passedQuery;
+    page = 1;
+    setQParams({ page, query: passedQuery });
   }
 
-  function onPageChange(page) {
-    setPage(page);
-    setQParams({ query, page });
-    navigate(`/movies?page=${page}&query=${query}`);
+  function onPageChange(passedPage) {
+    page = parseInt(passedPage);
+    setQParams({ page: passedPage, query });
   }
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function MoviesPage() {
     searchMovies(query, page)
       .then(movies => {
         setMovies(movies.results);
-        setPage(movies.page);
+        page = parseInt(movies.page);
         setTotalPages(movies.total_pages);
       })
       .catch(() => {
@@ -54,7 +54,7 @@ export default function MoviesPage() {
 
   return (
     <section className={css.section}>
-      <SearchBar onSearch={onMovieSearch} />
+      <SearchBar onSearch={onMovieSearch} initialQuery={query} />
 
       {isLoading && <Loader />}
 
@@ -74,7 +74,7 @@ export default function MoviesPage() {
           <Pagination page={page} totalPages={totalPages} setPage={onPageChange} />
         </>
       ) : (
-        <>{query && <p>No movies found</p>}</>
+        query && <p>No movies found</p>
       )}
     </section>
   );

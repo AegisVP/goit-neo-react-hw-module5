@@ -3,11 +3,11 @@ import css from './SearchBar.module.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 import { useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ onSearch, initialQuery = '' }) {
   const [searchParams] = useSearchParams();
-  const [query, setQuery] = useState(searchParams.get('query') || '');
+  const [query, setQuery] = useState(searchParams.get('query') || initialQuery || '');
 
   function handleChange(event) {
     setQuery(event.currentTarget.value);
@@ -17,6 +17,10 @@ export default function SearchBar({ onSearch }) {
     event.preventDefault();
     onSearch(query.trim());
   }
+
+  useEffect(() => {
+    setQuery(initialQuery);
+  }, [initialQuery]);
 
   return (
     <form onSubmit={handleSubmit} className={css.searchBoxForm}>
@@ -32,4 +36,5 @@ export default function SearchBar({ onSearch }) {
 
 SearchBar.propTypes = {
   onSearch: PropTypes.func.isRequired,
+  initialQuery: PropTypes.string,
 };
