@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import CommonLayout from '../../pages/CommonLayout/CommonLayout';
+import Loader from '../Loader/Loader';
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
@@ -11,7 +12,7 @@ const MovieReviews = lazy(() => import('../MovieReviews/MovieReviews'));
 
 export default function App() {
   return (
-    <Suspense fallback={'Loading (app) ...'}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<CommonLayout />}>
           <Route index element={<HomePage />} />
