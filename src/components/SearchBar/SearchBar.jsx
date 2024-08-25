@@ -19,7 +19,7 @@ export default function SearchBar({ onSearch }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={css.searchBoxForm}>
       <label className={css.searchBoxLabel}>
         <input name="query" type="text" autoComplete="off" autoFocus placeholder="Search movies" className={css.searchBox} value={query} onChange={handleChange} />
         <button type="submit" className={css.searchButton}>

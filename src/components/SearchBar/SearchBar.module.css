@@ -1,10 +1,16 @@
+.searchBoxForm {
+  width: 100%;
+}
+
 .searchBoxLabel {
+  width: 100%;
   position: relative;
   color: black;
 }
 
 .searchBox {
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   padding: 2px 32px 5px 5px;
 
   outline: none;
